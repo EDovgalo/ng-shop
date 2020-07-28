@@ -1,0 +1,13 @@
+<div>
+  <h2>Cart List</h2>
+  <ul *ngIf="isShowProductList; else emptyCartTmpl">
+    <li *ngFor="let product of cartService.purchasedProducts">
+      <p>{{product.name}}</p>
+      <p>{{product.description}}</p>
+      <p><b>{{product.price}}</b></p>
+    </li>
+  </ul>
+  <ng-template #emptyCartTmpl>
+    <h4>Your cart is empty</h4>
+  </ng-template>
+</div>
