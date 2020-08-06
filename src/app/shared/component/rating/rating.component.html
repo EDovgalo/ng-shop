@@ -1,0 +1,9 @@
+<div class="rating">
+  <ul class="rating__list">
+    <li *ngFor="let start of arrayStars; let i = index"
+        [class.active]=" i < rating"
+        class="rating__item">
+      &#9734;
+    </li>
+  </ul>
+</div>

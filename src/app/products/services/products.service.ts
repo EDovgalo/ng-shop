@@ -1,32 +1,28 @@
 import {Injectable} from '@angular/core';
-import {IProductModel} from '../models/product.model';
+import {CategoryEnum, ProductModel} from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
 
-  private productsList: IProductModel[] = [
-    {id: 1, name: 'BMW', description: 'car', price: 1000},
-    {id: 2, name: 'BMX', description: 'bicycle', price: 500},
-    {id: 3, name: 'Volvo', description: 'car', price: 1500},
+  private productsList: ProductModel[] = [
+    new ProductModel(1, ' Washing Machine', 'Great Washing Machine',
+      1, true, CategoryEnum.homeAppliances),
+    new ProductModel(2, 'Pen', 'blue color', 2, true, CategoryEnum.officeSupplies),
+    new ProductModel(3, 'Microwave', 'A good microwave will be able to make your life a little bit easier', 40,
+      false, CategoryEnum.homeAppliances),
+    new ProductModel(4, 'Toaster', 'The toaster isn’t necessarily an essential home appliance to own',
+      10, true, CategoryEnum.homeAppliances),
+    new ProductModel(5, 'pencil ', 'An artist\'s small, fine brush',
+      1, false, CategoryEnum.officeSupplies),
   ];
 
   constructor() {
   }
 
-  get products(): IProductModel[] {
+  get products(): ProductModel[] {
     return this.productsList;
-  }
-
-  buyProduct(productId): IProductModel {
-    const product = this.productsList.find(productItem => productItem.id === productId);
-    this.removeProduct(productId);
-    return product;
-  }
-
-  private removeProduct(productId): void {
-    this.productsList = this.productsList.filter(product => product.id !== productId);
   }
 
 }

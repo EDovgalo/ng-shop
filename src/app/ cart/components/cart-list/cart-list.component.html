@@ -1,13 +1,19 @@
-<div>
-  <h2>Cart List</h2>
-  <ul *ngIf="isShowProductList; else emptyCartTmpl">
-    <li *ngFor="let product of cartService.purchasedProducts">
-      <p>{{product.name}}</p>
-      <p>{{product.description}}</p>
-      <p><b>{{product.price}}</b></p>
-    </li>
-  </ul>
-  <ng-template #emptyCartTmpl>
-    <h4>Your cart is empty</h4>
+<div class="cart-list">
+  <h2>Cart list</h2>
+  <div *ngIf="cartInfo.quantityProducts;else emptyCart" class="cart-list__info">
+    <p>total products: {{cartInfo.quantityProducts}}</p>
+    <p>total: {{cartInfo.totalAmount}}</p>
+  </div>
+  <ng-template #emptyCart>
+    <h5 class="cart-list__empty-title">Cart is empty</h5>
   </ng-template>
+
+  <div class="cart-list__list">
+    <app-cart-item
+      *ngFor="let cartProduct of cartInfo.cartProducts"
+      [cartProduct]="cartProduct"
+      (changeQuantityProduct)="changeQuantityProduct($event)"
+      (deleteProduct)="deleteProduct($event)">
+    </app-cart-item>
+  </div>
 </div>

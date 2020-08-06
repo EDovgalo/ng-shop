@@ -1,0 +1,15 @@
+.rating {
+  &__list {
+    display: flex;
+    font-size: 32px;
+    list-style: none;
+  }
+
+  &__item:not(:first-child) {
+    margin-left: 3px;
+  }
+
+  .active {
+    color: #ffeb64;
+  }
+}

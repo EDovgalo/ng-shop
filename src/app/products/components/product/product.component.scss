@@ -1,0 +1,24 @@
+.product {
+  display: inline-block;
+  width: 150px;
+  max-width: 150px;
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid;
+  border-radius: 3px;
+
+  .product-props {
+    padding: 0;
+  }
+
+  &__btn-buy {
+    width: 100%;
+    margin-top: 5px;
+    padding: 3px;
+  }
+
+}
+
+.disabled {
+  opacity: .4;
+}
