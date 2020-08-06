@@ -19,6 +19,7 @@ export class ProductsService {
     return this.products;
   }
 
+  // немного необычное поведение: покупка товара - удаляет его из ассортимента магазина
   buyProduct(productId): IProductModel {
     const product = this.products.find(productItem => productItem.id === productId);
     this.removeProduct(productId);

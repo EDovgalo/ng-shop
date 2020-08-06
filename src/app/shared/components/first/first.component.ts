@@ -12,7 +12,7 @@ export class FirstComponent implements OnInit {
   description = 'This is first Component';
   price = 1000;
   isAvailable = true;
-  category: CategoryEnum
+  category: CategoryEnum;
 
   constructor() {
   }
