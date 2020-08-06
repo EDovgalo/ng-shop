@@ -49,7 +49,7 @@ export class CartService {
     const product = this.getProductById(cartProduct.id);
     product.count--;
     this.quantityProducts -= 1;
-    this.totalAmount -= product.price * product.count;
+    this.totalAmount -= product.price;
     this.updateChannelData();
   }
 
