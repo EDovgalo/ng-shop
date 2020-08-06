@@ -6,7 +6,7 @@ import {IProductModel} from '../models/product.model';
 })
 export class ProductsService {
 
-  private products: IProductModel[] = [
+  private productsList: IProductModel[] = [
     {id: 1, name: 'BMW', description: 'car', price: 1000},
     {id: 2, name: 'BMX', description: 'bicycle', price: 500},
     {id: 3, name: 'Volvo', description: 'car', price: 1500},
@@ -15,19 +15,18 @@ export class ProductsService {
   constructor() {
   }
 
-  getProducts(): IProductModel[] {
-    return this.products;
+  get products(): IProductModel[] {
+    return this.productsList;
   }
 
-  // немного необычное поведение: покупка товара - удаляет его из ассортимента магазина
   buyProduct(productId): IProductModel {
-    const product = this.products.find(productItem => productItem.id === productId);
+    const product = this.productsList.find(productItem => productItem.id === productId);
     this.removeProduct(productId);
     return product;
   }
 
   private removeProduct(productId): void {
-    this.products = this.products.filter(product => product.id !== productId);
+    this.productsList = this.productsList.filter(product => product.id !== productId);
   }
 
 }

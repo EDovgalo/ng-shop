@@ -27,9 +27,8 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  // попробуйте упростить код, сделав this.products гетером - это предложение
   private initProducts(): void {
-    this.products = this.productsService.getProducts();
+    this.products = this.productsService.products;
   }
 
 }
