@@ -1,0 +1,23 @@
+<div class="product">
+  <div [appHighlight]="'#1976d2'" class="product__wrapper">
+    <ul class="product-props">
+      <li class="product-props__value">Name: {{cartProduct.name}}</li>
+      <li class="product-props__value">Description: {{cartProduct.description}}</li>
+      <li class="product-props__value">Price: {{cartProduct.price}}</li>
+    </ul>
+    <div class="product__controls">
+      <button *ngIf="cartProduct.count >= 2"
+              class="product__btn product__dec"
+              (click)="onChangeQuantityProduct(true)">&#x3c;
+      </button>
+      <span class="product__count">{{cartProduct.count}}</span>
+      <button class="product__btn"
+              (click)="onChangeQuantityProduct(false)">&#x3e;
+      </button>
+    </div>
+    <button class="product__btn-remove"
+            (click)="onDeleteProduct()">delete
+    </button>
+  </div>
+</div>
+

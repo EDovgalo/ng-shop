@@ -1,5 +1,14 @@
-<div>
-  <h2>Product Component</h2>
-  <button (click)="onBuy()">buy</button>
+<div class="product" [class.disabled]="!product.isAvailable">
+  <ul class="product-props">
+    <li class="product-props__value">Name: {{product.name}}</li>
+    <li class="product-props__value">Description: {{product.description}}</li>
+    <li class="product-props__value">Price: {{product.price}}</li>
+    <li class="product-props__value">Category: {{product.category}}</li>
+  </ul>
+  <app-rating [countStart]="5" [rating]="3"></app-rating>
+  <button [appHighlight]="'#ade498'" *ngIf="product.isAvailable"
+          class="product__btn-buy"
+          (click)="onBuy()">buy
+  </button>
 </div>
 

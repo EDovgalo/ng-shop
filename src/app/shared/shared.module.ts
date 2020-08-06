@@ -1,14 +1,18 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FirstComponent} from './components/first/first.component';
+import { HighlightDirective } from './directives/highlight.directive';
+import { RatingComponent } from './component/rating/rating.component';
 
 
 @NgModule({
-  declarations: [FirstComponent],
+  declarations: [HighlightDirective, RatingComponent],
   imports: [
     CommonModule
   ],
-  exports: [FirstComponent]
+    exports: [
+        HighlightDirective,
+        RatingComponent
+    ]
 })
 export class SharedModule {
 }
