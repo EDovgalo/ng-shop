@@ -38,16 +38,18 @@ export class CartService {
   }
 
   increaseQuantity(cartProduct): void {
-    cartProduct.count++;
+    const product = this.getProductById(cartProduct.id);
+    product.count++;
     this.quantityProducts++;
-    this.totalAmount += cartProduct.price;
+    this.totalAmount += product.price;
     this.updateChannelData();
   }
 
   decreaseQuantity(cartProduct): void {
-    cartProduct.count--;
+    const product = this.getProductById(cartProduct.id);
+    product.count--;
     this.quantityProducts -= 1;
-    this.totalAmount -= cartProduct.price * cartProduct.count;
+    this.totalAmount -= product.price * product.count;
     this.updateChannelData();
   }
 
