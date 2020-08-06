@@ -21,36 +21,50 @@ export class CartService {
 
   addProduct(product: ProductModel): void {
     const {id, name, description, price} = product;
-    const cartProduct = new CartProductModel(id, name, description, price);
-    this.cartProducts.push(cartProduct);
-    this.increaseQuantity(product);
+    let cartProduct = this.getProductById(id);
+    if (!cartProduct) {
+      cartProduct = new CartProductModel(id, name, description, price);
+      this.cartProducts.push(cartProduct);
+    }
+    this.increaseQuantity(cartProduct);
     this.updateChannelData();
   }
 
   deleteProduct(cartProduct: CartProductModel): void {
-    this.cartProducts = this.cartProducts.filter(item => item.id !== cartProduct.id);
+    this.cartProducts = this.removeProductFromList(cartProduct);
     this.totalAmount -= cartProduct.price * cartProduct.count;
     this.quantityProducts -= cartProduct.count;
     this.updateChannelData();
   }
 
   increaseQuantity(cartProduct): void {
-    cartProduct.count++;
+    const product = this.getProductById(cartProduct.id);
+    product.count++;
     this.quantityProducts++;
-    this.totalAmount += cartProduct.price;
+    this.totalAmount += product.price;
     this.updateChannelData();
   }
 
   decreaseQuantity(cartProduct): void {
-    cartProduct.count--;
+    const product = this.getProductById(cartProduct.id);
+    product.count--;
     this.quantityProducts -= 1;
-    this.totalAmount -= cartProduct.price * cartProduct.count;
+    this.totalAmount -= product.price * product.count;
     this.updateChannelData();
   }
 
+  private removeProductFromList(cartProduct): CartProductModel[] {
+    return this.cartProducts.filter(item => item.id !== cartProduct.id);
+  }
+
+  private getProductById(id): CartProductModel {
+    return this.cartProducts.find(item => item.id === id);
+  }
+
   private updateChannelData(): void {
+    const cloneProducts = this.cartProducts.map(item => Object.assign({}, item));
     this.channel.next(new CartDataModel
-      (this.cartProducts, this.totalAmount, this.quantityProducts)
+      (cloneProducts, this.totalAmount, this.quantityProducts)
     );
   }
 
