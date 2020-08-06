@@ -10,7 +10,7 @@ export class RatingComponent implements OnInit {
   @Input() countStart: number;
   @Input() rating = 0;
 
-  private arrayStars: number[];
+  arrayStars: number[];
 
   constructor() {
   }

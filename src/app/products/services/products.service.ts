@@ -6,7 +6,7 @@ import {CategoryEnum, ProductModel} from '../models/product.model';
 })
 export class ProductsService {
 
-  private products: ProductModel[] = [
+  private productsList: ProductModel[] = [
     new ProductModel(1, ' Washing Machine', 'Great Washing Machine',
       1, true, CategoryEnum.homeAppliances),
     new ProductModel(2, 'Pen', 'blue color', 2, true, CategoryEnum.officeSupplies),
@@ -21,18 +21,8 @@ export class ProductsService {
   constructor() {
   }
 
-  getProducts(): ProductModel[] {
-    return this.products;
-  }
-
-  buyProduct(productId): ProductModel {
-    const product = this.products.find(productItem => productItem.id === productId);
-    this.removeProduct(productId);
-    return product;
-  }
-
-  private removeProduct(productId): void {
-    this.products = this.products.filter(product => product.id !== productId);
+  get products(): ProductModel[] {
+    return this.productsList;
   }
 
 }
