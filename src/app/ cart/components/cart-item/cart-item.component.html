@@ -3,7 +3,7 @@
     <ul class="product-props">
       <li class="product-props__value">Name: {{cartProduct.name}}</li>
       <li class="product-props__value">Description: {{cartProduct.description}}</li>
-      <li class="product-props__value">Price: {{cartProduct.price}}</li>
+      <li class="product-props__value">Price: {{cartProduct.price  | currency}}</li>
     </ul>
     <div class="product__controls">
       <button *ngIf="cartProduct.count >= 2"

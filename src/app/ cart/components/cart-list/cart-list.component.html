@@ -8,9 +8,19 @@
     <h5 class="cart-list__empty-title">Cart is empty</h5>
   </ng-template>
 
+  <div class="cart-list__sort-controls" *ngIf="cartInfo.quantityProducts">
+    sort by
+    <select class="sort-controls__select" [(ngModel)]="sortBy">
+      <option *ngFor="let sortField of sortFields" [value]="sortField">{{sortField}}</option>
+    </select>
+    <span class="sort-controls__sort-asc">
+       asc <input type="checkbox" [(ngModel)]="isSortAsc">
+    </span>
+  </div>
+
   <div class="cart-list__list">
     <app-cart-item
-      *ngFor="let cartProduct of cartInfo.cartProducts"
+      *ngFor="let cartProduct of cartInfo.cartProducts | orderBy: sortBy : isSortAsc"
       [cartProduct]="cartProduct"
       (increaseQuantity)="increaseQuantity($event)"
       (decreaseQuantity)="decreaseQuantity($event)"
