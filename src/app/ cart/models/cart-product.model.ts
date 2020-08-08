@@ -4,6 +4,6 @@ export class CartProductModel {
     public name: string,
     public description: string,
     public price: number,
-    public count: number = 0) {
+    public count: number = 1) {
   }
 }

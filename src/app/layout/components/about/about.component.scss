@@ -1,0 +1,36 @@
+.about {
+  padding: 30px;
+  margin-bottom: 30px;
+
+  .symbols-generator {
+    margin: 20px 0;
+  }
+
+  &__sub-title {
+    font-size: 18px;
+  }
+
+  &__title {
+    font-size: 24px;
+  }
+
+  .config-form {
+    &__title {
+      display: inline-block;
+      width: 70px;
+      font-size: 18px;
+    }
+
+    &__item {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+  }
+
+  &__btn-save {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+}

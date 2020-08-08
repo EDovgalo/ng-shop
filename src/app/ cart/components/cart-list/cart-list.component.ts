@@ -3,6 +3,7 @@ import {CartService} from '../../services/cart.service';
 import {CartDataModel} from '../../models/cart-data.model';
 import {Subscription} from 'rxjs';
 import {CartProductModel} from '../../models/cart-product.model';
+import {ProductModel} from '../../../products/models/product.model';
 
 @Component({
   selector: 'app-cart-list',
@@ -29,9 +30,12 @@ export class CartListComponent implements OnInit, OnDestroy {
     this.cartService.deleteProduct(product);
   }
 
-  changeQuantityProduct(productData: any): void {
-    const {product, isDecreaseQuantity} = productData;
-    isDecreaseQuantity ? this.cartService.decreaseQuantity(product) : this.cartService.increaseQuantity(product);
+  increaseQuantity(product: CartProductModel): void {
+    this.cartService.increaseQuantity(product);
+  }
+
+  decreaseQuantity(product: CartProductModel): void {
+    this.cartService.decreaseQuantity(product);
   }
 
 }

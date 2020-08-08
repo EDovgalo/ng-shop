@@ -1,0 +1,42 @@
+<div class="about">
+  <h4 class="about__title">ABOUT</h4>
+  <h6 class="about__sub-title symbols-generator">
+    symbols generator {{symbols}}
+  </h6>
+
+  <div>
+    <h6 class="about__sub-title">User config form app version {{appVersion}}</h6>
+    <form class="config-form">
+
+      <div>
+        <label for="id">
+          <span class="config-form__title">{{ 'id' | uppercase}}</span>
+          <input [(ngModel)]="userConfig.id" class="config-form__item" name="id" id="id"/>
+        </label>
+      </div>
+
+      <div>
+        <label for="name">
+          <span class="config-form__title">{{'name' | uppercase}}</span>
+          <input [(ngModel)]="userConfig.name" class="config-form__item" name="name" id="name"/>
+        </label>
+      </div>
+
+      <div>
+        <label for="login">
+          <span class="config-form__title">{{'login' | uppercase}}</span>
+          <input [(ngModel)]="userConfig.login" class="config-form__item" name="login" id="login"/>
+        </label>
+      </div>
+
+      <div>
+        <label for="email">
+          <span class="config-form__title">{{'email' | uppercase}}</span>
+          <input [(ngModel)]="userConfig.email" class="config-form__item" name="email" id="email"/>
+        </label>
+      </div>
+
+      <button (click)="onSaveConfig()" class="about__btn-save">save config</button>
+    </form>
+  </div>
+</div>
