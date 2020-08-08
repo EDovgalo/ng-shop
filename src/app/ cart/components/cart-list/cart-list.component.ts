@@ -13,6 +13,10 @@ import {ProductModel} from '../../../products/models/product.model';
 export class CartListComponent implements OnInit, OnDestroy {
 
   cartInfo: CartDataModel = {} as CartDataModel;
+  sortFields = ['price', 'count', 'name'];
+  sortBy = this.sortFields[0];
+  isSortAsc = false;
+
   private cartInfoSub: Subscription;
 
   constructor(private cartService: CartService) {

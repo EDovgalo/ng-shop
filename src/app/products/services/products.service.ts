@@ -21,8 +21,8 @@ export class ProductsService {
   constructor() {
   }
 
-  get products(): ProductModel[] {
-    return this.productsList;
+  get products(): Promise<ProductModel[]> {
+    return Promise.resolve(this.productsList);
   }
 
 }
