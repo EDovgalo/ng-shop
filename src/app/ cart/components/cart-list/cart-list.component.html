@@ -12,7 +12,8 @@
     <app-cart-item
       *ngFor="let cartProduct of cartInfo.cartProducts"
       [cartProduct]="cartProduct"
-      (changeQuantityProduct)="changeQuantityProduct($event)"
+      (increaseQuantity)="increaseQuantity($event)"
+      (decreaseQuantity)="decreaseQuantity($event)"
       (deleteProduct)="deleteProduct($event)">
     </app-cart-item>
   </div>

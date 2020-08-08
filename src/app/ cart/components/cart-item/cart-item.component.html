@@ -1,4 +1,4 @@
-<div class="product">
+<div class="product" [appZoom]="1.2">
   <div [appHighlight]="'#1976d2'" class="product__wrapper">
     <ul class="product-props">
       <li class="product-props__value">Name: {{cartProduct.name}}</li>
@@ -8,11 +8,11 @@
     <div class="product__controls">
       <button *ngIf="cartProduct.count >= 2"
               class="product__btn product__dec"
-              (click)="onChangeQuantityProduct(true)">&#x3c;
+              (click)="$event.stopPropagation(); onDecreaseQuantity()">&#x3c;
       </button>
       <span class="product__count">{{cartProduct.count}}</span>
       <button class="product__btn"
-              (click)="onChangeQuantityProduct(false)">&#x3e;
+              (click)="$event.stopPropagation(); onIncreaseQuantity()">&#x3e;
       </button>
     </div>
     <button class="product__btn-remove"
