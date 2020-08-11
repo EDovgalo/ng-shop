@@ -13,6 +13,7 @@ export class AppComponent implements AfterContentInit {
   constructor(@Inject(APP_CONSTANTS) private constants: ConstantsService) {
   }
 
+  // Если декоратор ViewChild, то метод ngAfterViewInit
   ngAfterContentInit(): void {
     this.appTitle.nativeElement.innerText = this.constants.APP;
   }

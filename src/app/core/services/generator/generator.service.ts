@@ -11,6 +11,7 @@ export class GeneratorService {
   }
 
   generate(n: number): string {
+    // это не совсем случайная последовательность...
     return this.symbols.slice(0, n);
   }
 }
