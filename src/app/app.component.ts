@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, ElementRef, Inject, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Inject, ViewChild} from '@angular/core';
 import {APP_CONSTANTS, ConstantsService} from './core/services/ constants/constants.service';
 
 @Component({
@@ -6,14 +6,14 @@ import {APP_CONSTANTS, ConstantsService} from './core/services/ constants/consta
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterContentInit {
+export class AppComponent implements AfterViewInit {
 
   @ViewChild('appTitle', {static: true}) private appTitle: ElementRef;
 
   constructor(@Inject(APP_CONSTANTS) private constants: ConstantsService) {
   }
 
-  ngAfterContentInit(): void {
+  ngAfterViewInit(): void {
     this.appTitle.nativeElement.innerText = this.constants.APP;
   }
 }

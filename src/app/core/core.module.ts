@@ -9,7 +9,7 @@ import {GeneratorService} from './services/generator/generator.service';
   declarations: [],
   providers: [
     {provide: APP_CONSTANTS, useValue: CONSTANTS},
-    {provide: symbolN5, useFactory: symbolGeneratorNFactory(5), deps: [GeneratorService]}
+    {provide: symbolN5, useFactory: symbolGeneratorNFactory(15), deps: [GeneratorService]}
   ],
   imports: [
     CommonModule

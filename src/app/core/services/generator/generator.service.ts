@@ -11,7 +11,8 @@ export class GeneratorService {
   }
 
   generate(n: number): string {
-    return this.symbols.slice(0, n);
+    const randomNumber =  Math.floor(Math.random() * Math.floor(n));
+    return this.symbols.slice(0, randomNumber);
   }
 }
 
