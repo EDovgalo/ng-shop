@@ -1,0 +1,30 @@
+<div class="card shadow-sm h-100" [class.disabled]="!product.isAvailable">
+  <div class="card-header">
+    <h4>{{product.name}}</h4>
+    <h5 class="text-warning" *ngIf="!product.isAvailable">not available</h5>
+  </div>
+  <div class="card-body mb-4">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Description: {{product.description | titlecase}}</li>
+      <li class="list-group-item">Price: {{product.price  | currency}}</li>
+      <li class="list-group-item">Category: {{product.category | uppercase}}</li>
+    </ul>
+
+    <button *ngIf="product.isAvailable && isViewBuy"
+            class="btn btn-block btn-primary shadow-none"
+            (click)="onBuy()">buy
+    </button>
+
+    <a *ngIf="isViewMode"
+       [routerLink]="['/product', product.id]"
+       class="btn btn-block btn-success shadow-none">
+      View
+    </a>
+
+  </div>
+  <div class="card-footer text-muted">
+    <app-rating [countStart]="5" [rating]="3"></app-rating>
+  </div>
+  <ng-content></ng-content>
+</div>
+

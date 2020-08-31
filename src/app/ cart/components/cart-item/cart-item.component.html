@@ -1,23 +1,31 @@
-<div class="product" [appZoom]="1.2">
-  <div [appHighlight]="'#1976d2'" class="product__wrapper">
-    <ul class="product-props">
-      <li class="product-props__value">Name: {{cartProduct.name}}</li>
-      <li class="product-props__value">Description: {{cartProduct.description}}</li>
-      <li class="product-props__value">Price: {{cartProduct.price  | currency}}</li>
+<div class="card shadow-sm  mb-4" [appZoom]="1.2">
+  <div class="card-header">
+    <h4 class="my-0 font-weight-normal">{{cartProduct.name}}</h4>
+  </div>
+  <div class="card-body mb-4">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Description: {{cartProduct.description}}</li>
+      <li class="list-group-item">Price: {{cartProduct.price  | currency}}</li>
     </ul>
-    <div class="product__controls">
+    <div class="d-flex justify-content-center">
       <button *ngIf="cartProduct.count >= 2"
-              class="product__btn product__dec"
+              class="btn btn-secondary"
               (click)="$event.stopPropagation(); onDecreaseQuantity()">&#x3c;
       </button>
-      <span class="product__count">{{cartProduct.count}}</span>
-      <button class="product__btn"
+      <span class="align-self-center font-weight-bold ml-2 mr-2">{{cartProduct.count}}</span>
+      <button class="btn btn-primary"
               (click)="$event.stopPropagation(); onIncreaseQuantity()">&#x3e;
       </button>
     </div>
-    <button class="product__btn-remove"
-            (click)="onDeleteProduct()">delete
-    </button>
+
+    <div class="d-flex justify-content-center mt-1">
+      <button class="btn btn-danger"
+              (click)="onDeleteProduct()">delete
+      </button>
+    </div>
+
   </div>
+
+  <!--  </div>-->
 </div>
 

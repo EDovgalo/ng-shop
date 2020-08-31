@@ -27,7 +27,7 @@ export class ConfigOptionsService {
 
   private initConfig(): void {
     this.appId = this.constants ? this.constants.APP : 'ng-shop';
-    this.config = JSON.parse(this.localStorageService.getItem(this.appId));
+    this.config = this.localStorageService.getItem(this.appId);
   }
 
 }

@@ -5,12 +5,14 @@ import {RatingComponent} from './components/rating/rating.component';
 import {ZoomDirective} from './directives/zoom/zoom.directive';
 import {OrderByPipe} from './pipes/order-by/oreder-by.pipe';
 import {FormsModule} from '@angular/forms';
+import {ProductCardComponent} from './components/product-card/product-card.component';
+import {RouterModule} from '@angular/router';
 
-const declarations = [HighlightDirective, RatingComponent, ZoomDirective, OrderByPipe];
+const declarations = [HighlightDirective, RatingComponent, ZoomDirective, OrderByPipe, ProductCardComponent];
 
 @NgModule({
   declarations: [...declarations],
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   exports: [...declarations, CommonModule, FormsModule]
 })
 export class SharedModule {

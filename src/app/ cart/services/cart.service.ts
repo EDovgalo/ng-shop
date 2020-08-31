@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {ProductModel} from '../../products/models/product.model';
+import {ProductModel} from '../../shared/models/product.model';
 import {CartProductModel} from '../models/cart-product.model';
-import {Subject} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {CartDataModel} from '../models/cart-data.model';
 
 @Injectable({
@@ -9,11 +9,11 @@ import {CartDataModel} from '../models/cart-data.model';
 })
 export class CartService {
 
-  private cartProducts = new Map();
-  private channel = new Subject<CartDataModel>();
+  private mapCartProducts = new Map();
+  private channel = new BehaviorSubject<CartDataModel>(null);
   private totalSum = 0;
-  private quantityProducts = 0;
 
+  quantityProducts = 0;
   channel$ = this.channel.asObservable();
 
   constructor() {
@@ -21,46 +21,58 @@ export class CartService {
 
   addProduct(product: ProductModel): void {
     const {id, name, description, price} = product;
-    if (this.cartProducts.has(id)) {
-      this.increaseQuantity(this.cartProducts.get(id));
+    if (this.mapCartProducts.has(id)) {
+      this.increaseQuantity(this.mapCartProducts.get(id));
     } else {
       const cartProduct = new CartProductModel(id, name, description, price);
-      this.cartProducts.set(id, cartProduct);
+      this.mapCartProducts.set(id, cartProduct);
     }
-    this.updateCartData();
+    this.updateChannel();
   }
 
   deleteProduct(cartProduct: CartProductModel): void {
-    this.cartProducts.delete(cartProduct.id);
-    this.updateCartData();
+    this.mapCartProducts.delete(cartProduct.id);
+    this.updateChannel();
   }
 
   increaseQuantity(cartProduct): void {
     cartProduct.count += 1;
-    this.cartProducts.set(cartProduct.id, cartProduct);
-    this.updateCartData();
+    this.mapCartProducts.set(cartProduct.id, cartProduct);
+    this.updateChannel();
   }
 
   decreaseQuantity(cartProduct): void {
     cartProduct.count--;
-    this.cartProducts.set(cartProduct.id, cartProduct);
-    this.updateCartData();
+    this.mapCartProducts.set(cartProduct.id, cartProduct);
+    this.updateChannel();
+  }
+
+  resetCart(): void {
+    this.mapCartProducts = new Map();
+    this.updateChannel();
+  }
+
+  get cartProducts(): any {
+    return Array.from(this.mapCartProducts.values());
   }
 
   private updateCartData(): void {
     let totalSum = 0;
     let quantityProducts = 0;
-    const cloneProducts = Array.from(this.cartProducts.values()).map(item => {
+    Array.from(this.mapCartProducts.values()).forEach(item => {
       totalSum += item.price * item.count;
       quantityProducts += item.count;
-      return Object.assign({}, item);
+      this.mapCartProducts.set(item.id, Object.assign({}, item));
     });
 
     this.totalSum = totalSum;
     this.quantityProducts = quantityProducts;
+  }
 
+  private updateChannel(): void {
+    this.updateCartData();
     this.channel.next(new CartDataModel
-      (cloneProducts, totalSum, quantityProducts)
+      (this.cartProducts, this.totalSum, this.quantityProducts)
     );
   }
 

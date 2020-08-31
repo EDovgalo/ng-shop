@@ -1,0 +1,12 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title">{{order.date | date: 'short'}}</h5>
+    <ul class="list-group list-group-horizontal" *ngFor="let product of order.products">
+      <li class="list-group-item">Name: {{product.productName}}</li>
+      <li class="list-group-item">Count: {{product.count}}</li>
+      <li class="list-group-item">Price: {{product.price}}</li>
+      <li class="card-footer text-muted">total: {{product.count * product.price}}</li>
+    </ul>
+  </div>
+  <div class="card-footer text-muted">total: {{totalSum}}</div>
+</div>

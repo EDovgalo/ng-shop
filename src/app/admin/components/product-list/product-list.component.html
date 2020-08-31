@@ -1,0 +1,10 @@
+<div>
+  <app-product-card class="mb-2" *ngFor="let product of products | async"
+                    [product]="product">
+    <div class="container d-flex justify-content-center p-2">
+      <a class="btn btn-success p-1 border-0 w-25 mr-2" [routerLink]="['edit', product.id]"> edit
+      </a>
+      <button class="btn btn-danger p-1 border-0 w-25">delete</button>
+    </div>
+  </app-product-card>
+</div>

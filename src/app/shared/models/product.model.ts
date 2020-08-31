@@ -1,6 +1,11 @@
-export enum CategoryEnum {
+export enum ProductCategoryEnum {
   homeAppliances = 'home appliances',
   officeSupplies = 'office supplies',
+}
+
+export enum CardModeEnum {
+  VIEW = 1,
+  BUY = 2,
 }
 
 export class ProductModel {
@@ -9,6 +14,7 @@ export class ProductModel {
               public description: string,
               public price: number,
               public isAvailable: boolean,
-              public category: CategoryEnum) {
+              public category: ProductCategoryEnum) {
   }
 }
+

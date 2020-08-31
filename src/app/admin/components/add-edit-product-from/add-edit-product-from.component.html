@@ -1,0 +1,41 @@
+<div class="container d-flex flex-column align-items-center">
+  <form class="w-75">
+    <div class="form-group item w-100">
+      <label class="title" for="name">name</label>
+      <input [(ngModel)]="product.name" name="name" class="form-control w-100" id="name">
+    </div>
+    <div class="form-group item w-100">
+      <label class="title" for="description">description</label>
+      <textarea [(ngModel)]="product.description" class="form-control w-100" name="description"
+                id="description"></textarea>
+    </div>
+    <div class="form-group item w-100">
+      <label class="title" for="Price">Price</label>
+      <input [(ngModel)]="product.price" class="form-control w-100" id="Price" name="price" type="number"/>
+    </div>
+    <div class="form-group item w-100">
+      <label class="title" for="categories">Category</label>
+      <select [(ngModel)]="product.category" class="form-control w-100" name="category" id="categories">
+        <option *ngFor="let item of productCategories" [ngValue]="item.value">
+          {{item.value}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group item w-100 mt-2">
+      <div class="form-check">
+        <label class="form-check-label" for="available">Available</label>
+        <input [value]="true" [(ngModel)]="product.isAvailable" id="available" class="form-check-input ml-2"
+               type="radio"
+               name="is-available">
+      </div>
+      <div class="form-check">
+        <label class="form-check-label" for="unavailable">Unavailable</label>
+        <input [value]="false" [(ngModel)]="product.isAvailable" id="unavailable" class="form-check-input ml-2"
+               type="radio"
+               name="is-available">
+      </div>
+    </div>
+  </form>
+  <button class="btn btn-success p-2 m-2 border-0" (click)="onSave()">
+    {{product.id ? 'update': 'add'}}</button>
+</div>

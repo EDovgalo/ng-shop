@@ -1,0 +1,11 @@
+<div>
+  <nav class="nav nav-pills d-flex flex-row mb-2">
+    <a class="nav-item nav-link" routerLink="products" [routerLinkActiveOptions]="{ exact: true }"
+       routerLinkActive="active">products</a>
+    <a class="nav-item nav-link" routerLink="products/add" routerLinkActive="active">add</a>
+  </nav>
+</div>
+<div class="container p-3">
+  <router-outlet></router-outlet>
+</div>
+

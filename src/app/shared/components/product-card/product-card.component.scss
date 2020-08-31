@@ -1,0 +1,13 @@
+:host(.mb-2) {
+  & > div {
+    margin-bottom: 20px;
+  }
+
+}
+
+.view-mode-card {
+  height: 200px;
+  max-height: 200px;
+  overflow: hidden;
+}
+

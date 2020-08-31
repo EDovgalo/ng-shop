@@ -1,10 +1,8 @@
 <div>
-  <h2>Product List</h2>
-  <div class="products-list">
-    <app-product *ngFor="let product of products | async"
+  <div class="product-list">
+    <app-product-card *ngFor="let product of products | async"
                  [product]="product"
-                 (buy)="buyProduct($event)">
-    </app-product>
+                 [mode]="cardModes.VIEW">
+    </app-product-card>
   </div>
-
 </div>

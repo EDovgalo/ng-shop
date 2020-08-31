@@ -1,6 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CartProductModel} from '../../models/cart-product.model';
-import {ProductModel} from '../../../products/models/product.model';
 
 @Component({
   selector: 'app-cart-item',

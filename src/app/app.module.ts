@@ -7,7 +7,7 @@ import {SharedModule} from './shared/shared.module';
 import {ProductsModule} from './products/products.module';
 import {CartModule} from './ cart/cart.module';
 import {CoreModule} from './core/core.module';
-import {LayoutModule} from './layout/layout.module';
+
 
 @NgModule({
   declarations: [
@@ -15,12 +15,11 @@ import {LayoutModule} from './layout/layout.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     SharedModule,
     ProductsModule,
     CartModule,
     CoreModule,
-    LayoutModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

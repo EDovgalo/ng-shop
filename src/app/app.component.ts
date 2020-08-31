@@ -6,14 +6,9 @@ import {APP_CONSTANTS, ConstantsService} from './core/services/ constants/consta
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent {
 
-  @ViewChild('appTitle', {static: true}) private appTitle: ElementRef;
-
-  constructor(@Inject(APP_CONSTANTS) private constants: ConstantsService) {
+  constructor() {
   }
 
-  ngAfterViewInit(): void {
-    this.appTitle.nativeElement.innerText = this.constants.APP;
-  }
 }

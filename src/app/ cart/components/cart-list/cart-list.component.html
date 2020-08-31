@@ -1,30 +1,41 @@
 <div class="cart-list">
-  <h2>Cart list</h2>
-  <div *ngIf="cartInfo.quantityProducts;else emptyCart" class="cart-list__info">
-    <p>total products: {{cartInfo.quantityProducts}}</p>
-    <p>total: {{cartInfo.totalAmount}}</p>
-  </div>
+
+  <ng-container *ngIf="cartProducts && cartProducts.length; else emptyCart">
+    <div>
+      <p class="text-uppercase"> total products: <span class="font-weight-bold">{{cartInfo.quantityProducts}}</span></p>
+      <p class="text-uppercase">total: <span class="font-weight-bold">{{cartInfo.totalAmount}}</span></p>
+    </div>
+
+    <div class="mb-3 d-flex align-items-center">
+      <span class="text-uppercase font-weight-bold">sort by</span>
+      <select class="ml-2 mr-2 pl-2 pr-2" [(ngModel)]="sortBy">
+        <option *ngFor="let sortField of sortFields" [value]="sortField">{{sortField}}</option>
+      </select>
+
+      <div class="d-flex align-items-center ml-3">
+        <input type="checkbox" [(ngModel)]="isSortAsc" id="order-sort">
+        <label for="order-sort" class="text-uppercase font-weight-bold m-0 ml-1">asc</label>
+      </div>
+    </div>
+
+    <div class="product-list">
+      <app-cart-item
+        *ngFor="let product of cartProducts | orderBy: sortBy : isSortAsc"
+        [cartProduct]="product"
+        (increaseQuantity)="increaseQuantity($event)"
+        (decreaseQuantity)="decreaseQuantity($event)"
+        (deleteProduct)="deleteProduct($event)">
+      </app-cart-item>
+    </div>
+
+    <div class="d-flex">
+      <button class="btn-success btn border-0 m-auto" (click)="onCreateOrder()">confirm order</button>
+    </div>
+
+
+  </ng-container>
+
   <ng-template #emptyCart>
     <h5 class="cart-list__empty-title">Cart is empty</h5>
   </ng-template>
-
-  <div class="cart-list__sort-controls" *ngIf="cartInfo.quantityProducts">
-    sort by
-    <select class="sort-controls__select" [(ngModel)]="sortBy">
-      <option *ngFor="let sortField of sortFields" [value]="sortField">{{sortField}}</option>
-    </select>
-    <span class="sort-controls__sort-asc">
-       asc <input type="checkbox" [(ngModel)]="isSortAsc">
-    </span>
-  </div>
-
-  <div class="cart-list__list">
-    <app-cart-item
-      *ngFor="let cartProduct of cartInfo.cartProducts | orderBy: sortBy : isSortAsc"
-      [cartProduct]="cartProduct"
-      (increaseQuantity)="increaseQuantity($event)"
-      (decreaseQuantity)="decreaseQuantity($event)"
-      (deleteProduct)="deleteProduct($event)">
-    </app-cart-item>
-  </div>
 </div>

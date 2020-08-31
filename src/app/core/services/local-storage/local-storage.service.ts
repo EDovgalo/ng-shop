@@ -11,11 +11,11 @@ export class LocalStorageService {
   }
 
   setItem(key, value): void {
-    this.storage.setItem(key, value);
+    this.storage.setItem(key, JSON.stringify(value));
   }
 
   getItem(key): any {
-    return this.storage.getItem(key);
+    return JSON.parse(this.storage.getItem(key));
   }
 
   removeItem(key): void {
