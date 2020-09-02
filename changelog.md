@@ -126,10 +126,10 @@ SharedModule, ProductsModule, CartModule, а модули CommonModule, FormsMod
 
 
 Задание 5:
-Реализуйте:
-1. Список товаров (по аналогии TaskFeature Area)
+Реализованно:
+1. Список товаров
  /products-list
-2. Карточку товара. Отображает название, картинку, цену, кнопку купить.
+2. Карточка товара. Отображает название, картинку, цену, кнопку купить.
  /product/:productID
 3. Корзину
  /cart
@@ -142,8 +142,8 @@ SharedModule, ProductsModule, CartModule, а модули CommonModule, FormsMod
  /admin/product/edit:productID + resolve guard
  /admin/orders
  ...
- Админку защитить с помощью CanActivate Guard. Подгружать динамически, если у пользователя есть
+ Админку защищина с помощью CanActivate Guard. Подгружать динамически, если у пользователя есть
 право работать как админ.
  canActivateGuard. Важно! Не требуется реализации полного функционала админки.
-6. добавлен ToasterService, ToasterComponent
+6. добавлен ToasterService, ToasterComponent, показывает сообщение после обновление/добавления товара, оформления заказа
 7. localstorage сохроняет, загружает заказы
