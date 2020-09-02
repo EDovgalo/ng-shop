@@ -123,3 +123,27 @@ SharedModule, ProductsModule, CartModule, а модули CommonModule, FormsMod
 импорта, если они там присутствуют.
 
 7. cart-item, cart-list, product, product-list
+
+
+Задание 5:
+Реализуйте:
+1. Список товаров (по аналогии TaskFeature Area)
+ /products-list
+2. Карточку товара. Отображает название, картинку, цену, кнопку купить.
+ /product/:productID
+3. Корзину
+ /cart
+4. Формирование заказа
+ /order
+5. Админку (добавление/редактирование товара, количества, цены, ..., просмотр заказов).
+ /admin + canActivateGuard
+ /admin/products
+ /admin/product/add
+ /admin/product/edit:productID + resolve guard
+ /admin/orders
+ ...
+ Админку защитить с помощью CanActivate Guard. Подгружать динамически, если у пользователя есть
+право работать как админ.
+ canActivateGuard. Важно! Не требуется реализации полного функционала админки.
+6. добавлен ToasterService, ToasterComponent
+7. localstorage сохроняет, загружает заказы
