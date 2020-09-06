@@ -4,7 +4,7 @@
     <div class="container d-flex justify-content-center p-2">
       <a class="btn btn-success p-1 border-0 w-25 mr-2" [routerLink]="['edit', product.id]"> edit
       </a>
-      <button class="btn btn-danger p-1 border-0 w-25">delete</button>
+      <button class="btn btn-danger p-1 border-0 w-25" (click)="onDelete(product)">delete</button>
     </div>
   </app-product-card>
 </div>

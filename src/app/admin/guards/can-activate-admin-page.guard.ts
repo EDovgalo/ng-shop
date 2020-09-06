@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
 import {
-  CanActivate,
   ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  UrlTree,
-  Router,
+  CanActivate,
   CanActivateChild,
   CanLoad,
-  UrlSegment, Route
+  Route,
+  Router,
+  RouterStateSnapshot,
+  UrlSegment,
+  UrlTree
 } from '@angular/router';
 import {Observable} from 'rxjs';
 import {AuthService} from '../../core/services/auth.service';
@@ -42,8 +43,7 @@ export class CanActivateAdminPageGuard implements CanActivate, CanActivateChild,
     if (this.authService.isLogin) {
       return true;
     }
-    const redirectUrl = this.router.parseUrl('login');
-    return redirectUrl;
+    return this.router.parseUrl('login');
   }
 
 

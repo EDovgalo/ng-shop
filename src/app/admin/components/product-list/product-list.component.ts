@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ProductsService} from '../../../products/services/products.service';
+import {ProductPromiseService} from '../../../products/services/product-promise.service';
 import {ProductModel} from '../../../shared/models/product.model';
 
 @Component({
@@ -10,11 +10,17 @@ export class ProductListComponent implements OnInit {
 
   products: Promise<ProductModel[]>;
 
-  constructor(private productsService: ProductsService) {
+  constructor(private productsService: ProductPromiseService) {
   }
 
   ngOnInit(): void {
-    this.products = this.productsService.products;
+    this.products = this.productsService.getProducts();
+  }
+
+  onDelete(product): void {
+    this.productsService.deleteProduct(product).then(resp => {
+      this.products = this.productsService.getProducts();
+    });
   }
 
 }

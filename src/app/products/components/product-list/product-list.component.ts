@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ProductsService} from '../../services/products.service';
-import {CardModeEnum, ProductModel} from '../../../shared/models/product.model';
+import {ProductModel} from '../../../shared/models/product.model';
+import {ProductPromiseService} from '../../services/product-promise.service';
+
 
 @Component({
   selector: 'app-product-list',
@@ -10,17 +11,12 @@ import {CardModeEnum, ProductModel} from '../../../shared/models/product.model';
 export class ProductListComponent implements OnInit {
 
   products: Promise<ProductModel[]>;
-  cardModes = CardModeEnum;
 
-  constructor(private productsService: ProductsService) {
+
+  constructor(private productPromiseService: ProductPromiseService) {
   }
 
   ngOnInit(): void {
-    this.initProducts();
+    this.products = this.productPromiseService.getProducts();
   }
-
-  private initProducts(): void {
-    this.products = this.productsService.products;
-  }
-
 }

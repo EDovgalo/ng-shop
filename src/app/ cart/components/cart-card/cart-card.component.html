@@ -1,0 +1,18 @@
+<app-product-card [product]="product"
+                  [isShowAvailable]="false">
+  <div class="d-flex justify-content-center">
+    <button *ngIf="product.count >= 2"
+            class="btn btn-secondary"
+            (click)="$event.stopPropagation(); onDecreaseQuantity()">&#x3c;
+    </button>
+    <span class="align-self-center font-weight-bold ml-2 mr-2">{{product.count}}</span>
+    <button class="btn btn-primary"
+            (click)="$event.stopPropagation(); onIncreaseQuantity()">&#x3e;
+    </button>
+  </div>
+  <div class="d-flex justify-content-center mt-1">
+    <button class="btn btn-danger"
+            (click)="onDeleteProduct()">delete
+    </button>
+  </div>
+</app-product-card>

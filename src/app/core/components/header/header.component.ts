@@ -15,7 +15,6 @@ export class HeaderComponent implements AfterViewInit {
 
   constructor(@Inject(APP_CONSTANTS) private constants: ConstantsService,
               private router: Router,
-              public cartService: CartService,
               public authService: AuthService) {
   }
 

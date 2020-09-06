@@ -10,8 +10,7 @@ import {CardModeEnum, ProductModel} from '../../models/product.model';
 export class ProductCardComponent implements OnInit {
 
   @Input() product: ProductModel;
-  @Input() mode?: CardModeEnum;
-  @Output() buy: EventEmitter<ProductModel> = new EventEmitter();
+  @Input() isShowAvailable = true;
 
   constructor() {
   }
@@ -19,16 +18,12 @@ export class ProductCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onBuy(): void {
-    this.buy.emit(this.product);
-  }
-
-  get isViewMode(): boolean {
-    return this.mode === CardModeEnum.VIEW;
-  }
-
-  get isViewBuy(): boolean {
-    return this.mode === CardModeEnum.BUY;
+  get productCategories(): any {
+    const {categories} = this.product;
+    if (categories && categories.join) {
+      return categories.join(', ');
+    }
+    return categories;
   }
 
 }

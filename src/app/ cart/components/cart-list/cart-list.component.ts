@@ -1,13 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CartService} from '../../services/cart.service';
-import {CartDataModel} from '../../models/cart-data.model';
 import {Subscription} from 'rxjs';
 import {CartProductModel} from '../../models/cart-product.model';
-import {ProductModel} from '../../../shared/models/product.model';
 import {OrdersService} from '../../../orders/services/orders.service';
-import {OrderProductModel} from '../../../orders/models/order.model';
 import {Router} from '@angular/router';
 import {ToasterService} from '../../../widgets/services/toaster.service';
+import {CartDataModel} from '../../models/cart-data.model';
+import {AppSettingsService} from '../../../core/services/app-settings/app-settings.service';
 
 @Component({
   selector: 'app-cart-list',
@@ -16,49 +15,98 @@ import {ToasterService} from '../../../widgets/services/toaster.service';
 })
 export class CartListComponent implements OnInit, OnDestroy {
 
-  cartInfo: CartDataModel = {} as CartDataModel;
+  cartData = {} as CartDataModel;
   sortFields = ['price', 'count', 'name'];
-  sortBy = this.sortFields[0];
-  isSortAsc = false;
-  cartProducts: CartProductModel[] = [];
-
-  private cartInfoSub: Subscription;
+  products: CartProductModel[];
+  settings = {
+    sortBy: null,
+    isSortAsc: null,
+  };
+  private productsSub$: Subscription;
+  private settingsSub$: Subscription;
 
   constructor(private cartService: CartService,
               private router: Router,
               private toaster: ToasterService,
+              private appSettingsService: AppSettingsService,
               private orderService: OrdersService) {
   }
 
   ngOnInit(): void {
-    this.cartInfoSub = this.cartService.channel$.subscribe(cartInfo => {
-      this.cartInfo = cartInfo || {} as CartDataModel;
-      this.cartProducts = this.cartInfo.cartProducts;
-    });
+    this.loadProducts();
+    this.loadSettings();
   }
 
   ngOnDestroy(): void {
-    this.cartInfoSub.unsubscribe();
+    this.unsubscribeProducts();
+    this.unsubscribeSettings();
   }
 
   onCreateOrder(): void {
-    const order = this.cartProducts.map(item => new OrderProductModel(item.name, item.count, item.price));
-    this.orderService.createOrder(order);
-    this.cartService.resetCart();
-    this.toaster.showMessage('Order confirmed');
-    this.router.navigateByUrl('orders');
+    this.cartService.deleteAll().then(() => {
+      this.toaster.showMessage('order has been confirmed');
+      const orderId = this.orderService.createOrder(this.cartData.products);
+      this.router.navigate(['orders'], {queryParams: {scrollTo: orderId}});
+    });
   }
 
   deleteProduct(product: CartProductModel): void {
-    this.cartService.deleteProduct(product);
+    this.productsSub$ = this.cartService.deleteProduct(product).subscribe(resp => {
+      this.cartData = {} as CartDataModel;
+      this.toaster.showMessage('product has been deleted');
+    });
   }
 
   increaseQuantity(product: CartProductModel): void {
-    this.cartService.increaseQuantity(product);
+    const updateProduct = {...product};
+    updateProduct.count++;
+    this.unsubscribeProducts();
+    this.productsSub$ = this.cartService.updateProduct(updateProduct).subscribe(resp => {
+      this.cartData = resp;
+    });
   }
 
   decreaseQuantity(product: CartProductModel): void {
-    this.cartService.decreaseQuantity(product);
+    const updateProduct = {...product};
+    updateProduct.count--;
+    this.unsubscribeProducts();
+    this.productsSub$ = this.cartService.updateProduct(updateProduct).subscribe(resp => {
+      this.cartData = resp;
+    });
+  }
+
+  get isCartHasProduct(): number {
+    return this.cartData && this.cartData.products && this.cartData.products.length;
+  }
+
+  saveFilters(key, value): void {
+    this.appSettingsService.saveSettings(key, value);
+  }
+
+  private loadProducts(): void {
+    this.productsSub$ = this.cartService.getProducts()
+      .subscribe(resp => {
+        this.cartData = resp;
+      });
+  }
+
+  private loadSettings(): void {
+    this.settingsSub$ = this.appSettingsService.getSettings().subscribe(result => {
+      this.settings.sortBy = result.sortBy;
+      this.settings.isSortAsc = result.isSortAsc;
+    });
+  }
+
+  private unsubscribeProducts(): void {
+    if (this.productsSub$) {
+      this.productsSub$.unsubscribe();
+    }
+  }
+
+  private unsubscribeSettings(): void {
+    if (this.settingsSub$) {
+      this.settingsSub$.unsubscribe();
+    }
   }
 
 }

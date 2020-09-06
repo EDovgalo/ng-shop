@@ -1,5 +1,11 @@
-<app-product-card
-  [product]="product"
-  (buy)="buyProduct($event)"
-  [mode]="cardModes.BUY">
+<app-product-card *ngIf="product"
+                  [product]="product">
+  <div class="m-auto" *ngIf="product.isAvailable">
+
+    <button *ngIf="!isProductInCart; else message"
+            class="btn btn-success"
+            (click)="onBuy()">buy</button>
+
+    <ng-template #message><p class="text-primary">product in cart</p></ng-template>
+  </div>
 </app-product-card>

@@ -1,4 +1,6 @@
 <div>
-  <app-order-card *ngFor="let order of orders" [order]="order">
+  <app-order-card *ngFor="let order of orders" [order]="order"
+                  [id]="order.id"
+                  [class.highlight]="highlightOrderId === order.id">
   </app-order-card>
 </div>

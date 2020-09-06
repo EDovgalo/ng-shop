@@ -1,0 +1,36 @@
+{
+  "products": [
+    {
+      "id": 3,
+      "name": "Microwave",
+      "description": "A good microwave will be able to make your life a little bit easier",
+      "price": 200,
+      "isAvailable": true,
+      "rating": 1,
+      "categories": "office supplies"
+    },
+    {
+      "id": 4,
+      "name": "123",
+      "description": "test",
+      "price": 1234,
+      "categories": "office supplies",
+      "isAvailable": true
+    }
+  ],
+  "cart": [
+    {
+      "id": 1,
+      "name": "123",
+      "description": "test",
+      "price": 1234,
+      "isAvailable": true,
+      "categories": "office supplies",
+      "count": 1
+    }
+  ],
+  "settings": {
+    "sortBy": null,
+    "isSortAsc": null
+  }
+}

@@ -1,8 +1,9 @@
-<div>
-  <div class="product-list">
-    <app-product-card *ngFor="let product of products | async"
-                 [product]="product"
-                 [mode]="cardModes.VIEW">
-    </app-product-card>
-  </div>
+<div class="product-list">
+  <app-product-card *ngFor="let product of products | async"
+                    [product]="product">
+    <div class="m-auto">
+      <a class="btn btn-primary" [routerLink]="['../product', product.id]">view</a>
+    </div>
+  </app-product-card>
 </div>
+

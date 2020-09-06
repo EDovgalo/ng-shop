@@ -2,15 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {ProductCategoryEnum, ProductModel} from '../../../shared/models/product.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {pluck} from 'rxjs/operators';
-import {ProductsService} from '../../../products/services/products.service';
+import {ProductPromiseService} from '../../../products/services/product-promise.service';
 import {ToasterService} from '../../../widgets/services/toaster.service';
 
 @Component({
   selector: 'app-add-edit-product-from',
-  templateUrl: './add-edit-product-from.component.html',
-  styleUrls: ['./add-edit-product-from.component.scss']
+  templateUrl: './product-from.component.html',
+  styleUrls: ['./product-from.component.scss']
 })
-export class AddEditProductFromComponent implements OnInit {
+export class ProductFromComponent implements OnInit {
 
   productCategories = this.initProductCategories();
   product = {} as ProductModel;
@@ -18,7 +18,7 @@ export class AddEditProductFromComponent implements OnInit {
   constructor(private router: Router,
               private route: ActivatedRoute,
               private toasterService: ToasterService,
-              private productsService: ProductsService) {
+              private productsService: ProductPromiseService) {
   }
 
   ngOnInit(): void {
@@ -28,14 +28,18 @@ export class AddEditProductFromComponent implements OnInit {
   }
 
   onSave(): void {
-    if (this.product.id) {
-      this.productsService.updateProduct(this.product);
-    } else {
-      this.productsService.addProduct(this.product);
-    }
-    const message = `${this.product.id ? 'Update' : 'Add'} successful`;
-    this.toasterService.showMessage(message);
-    this.router.navigate(['admin', 'products']);
+    const product = {...this.product};
+    const request = this.product.id ? this.productsService.updateProduct(product) :
+      this.productsService.addProduct(product);
+
+    request.then(() => {
+      const message = `${this.product.id ? 'Update' : 'Add'} successful`;
+      this.toasterService.showMessage(message);
+      this.router.navigate(['admin', 'products']);
+    }).catch((err) => {
+      this.toasterService.showMessage(err.message || 'something went wrong try later');
+      this.router.navigate(['admin', 'products']);
+    });
   }
 
   private initProductCategories(): any {

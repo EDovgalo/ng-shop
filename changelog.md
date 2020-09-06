@@ -147,3 +147,23 @@ SharedModule, ProductsModule, CartModule, а модули CommonModule, FormsMod
  canActivateGuard. Важно! Не требуется реализации полного функционала админки.
 6. добавлен ToasterService, ToasterComponent
 7. localstorage сохроняет, загружает заказы
+
+Задание 6. HttpClient
+1. Реализуйте бекэнд для вашего проекта, используя, например, json-server
+
+2. Замените содержимое команды start в package.json на "concurrently --kill-others \"ng lint && ng serve -
+o\" \"json-server --watch db/db.json\""
+
+3. Создайте сервис для работы с HttpClient.
+
+4. Реализуйте часть методов по схеме Promise, а часть по схеме Observable. (CartService работает по схеме Observable
+, ProductPromiseService работает по схеме Promise)
+
+5. Реализуйте TimingInterceptor, который в консоль выводит длительность запросов. Добавьте фильтр,
+чтобы время подсчитывалось только для конкретных запросов.
+
+6. Реализуйте сервис AppSettings, который должен загружать настройки приложения из локал сторедж
+используя сервис LocalStorageService, разработанный ранее. Если в локал сторедж ничего нет, то
+загружать из файла assets/app-settings.json и при удачной загрузке записывать эти данные в локал
+сторедж, используя сервис LocalStorageService. При неудачной попытке делать две попытки. Если
+загрузить все-таки не удалось, то устанавливать значения настроек по-умолчанию. (Сохроняет фильтры на CartPage)

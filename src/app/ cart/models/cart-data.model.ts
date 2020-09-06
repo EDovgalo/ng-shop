@@ -2,7 +2,7 @@ import {CartProductModel} from './cart-product.model';
 
 export class CartDataModel {
   constructor(
-    public cartProducts: CartProductModel[],
+    public products: CartProductModel[],
     public totalAmount: number,
     public quantityProducts: number) {
   }

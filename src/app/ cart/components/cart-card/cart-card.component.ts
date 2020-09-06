@@ -1,15 +1,16 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CartProductModel} from '../../models/cart-product.model';
+import {ProductModel} from '../../../shared/models/product.model';
 
 @Component({
-  selector: 'app-cart-item',
-  templateUrl: './cart-item.component.html',
-  styleUrls: ['./cart-item.component.scss'],
+  selector: 'app-cart-card',
+  templateUrl: 'cart-card.component.html',
+  styleUrls: ['cart-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CartItemComponent implements OnInit {
+export class CartCardComponent implements OnInit {
 
-  @Input() cartProduct: CartProductModel;
+  @Input() product: CartProductModel;
   @Output() deleteProduct: EventEmitter<CartProductModel> = new EventEmitter();
   @Output() increaseQuantity: EventEmitter<CartProductModel> = new EventEmitter();
   @Output() decreaseQuantity: EventEmitter<CartProductModel> = new EventEmitter();
@@ -21,15 +22,15 @@ export class CartItemComponent implements OnInit {
   }
 
   onDeleteProduct(): void {
-    this.deleteProduct.emit(this.cartProduct);
+    this.deleteProduct.emit(this.product);
   }
 
   onIncreaseQuantity(): void {
-    this.increaseQuantity.emit(this.cartProduct);
+    this.increaseQuantity.emit(this.product);
   }
 
   onDecreaseQuantity(): void {
-    this.decreaseQuantity.emit(this.cartProduct);
+    this.decreaseQuantity.emit(this.product);
   }
 
 }

@@ -3,8 +3,8 @@ import {AdminPageComponent} from './admin-page.component';
 import {NgModule} from '@angular/core';
 import {ProductListComponent} from './components/product-list/product-list.component';
 import {CanActivateAdminPageGuard} from './guards/can-activate-admin-page.guard';
-import {AddEditProductFromComponent} from './components/add-edit-product-from/add-edit-product-from.component';
-import {AdminProductResolverGuard} from './guards/admin-product-resolver.guard';
+import {ProductFromComponent} from './components/product-from/product-from.component';
+import {AdminProductResolver} from './guards/admin-product.resolver';
 
 
 const routes: Routes = [
@@ -23,13 +23,13 @@ const routes: Routes = [
           },
           {
             path: 'products/add',
-            component: AddEditProductFromComponent,
+            component: ProductFromComponent,
           },
           {
             path: 'products/edit/:id',
-            component: AddEditProductFromComponent,
+            component: ProductFromComponent,
             resolve: {
-              product: AdminProductResolverGuard
+              product: AdminProductResolver
             },
           },
         ]

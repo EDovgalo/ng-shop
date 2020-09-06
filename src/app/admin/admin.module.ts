@@ -3,12 +3,12 @@ import {CommonModule} from '@angular/common';
 import {AdminPageComponent} from './admin-page.component';
 import {AdminRoutingModule} from './admin-routing.module';
 import {ProductListComponent} from './components/product-list/product-list.component';
-import {AddEditProductFromComponent} from './components/add-edit-product-from/add-edit-product-from.component';
+import {ProductFromComponent} from './components/product-from/product-from.component';
 import {SharedModule} from '../shared/shared.module';
 
 
 @NgModule({
-  declarations: [AdminPageComponent, ProductListComponent, AddEditProductFromComponent],
+  declarations: [AdminPageComponent, ProductListComponent, ProductFromComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

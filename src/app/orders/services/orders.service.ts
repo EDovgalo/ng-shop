@@ -12,11 +12,12 @@ export class OrdersService {
   constructor(private localStorageService: LocalStorageService) {
   }
 
-  createOrder(products): void {
+  createOrder(products): number {
     const userOrders = this.localStorageService.getItem(this.KEY) || [];
     const order = new OrderModel(products);
     userOrders.push(order);
     this.localStorageService.setItem(this.KEY, userOrders);
+    return order.id;
   }
 
   getAllOrders(): OrderModel[] {

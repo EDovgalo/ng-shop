@@ -14,7 +14,8 @@ export class ProductModel {
               public description: string,
               public price: number,
               public isAvailable: boolean,
-              public category: ProductCategoryEnum) {
+              public rating: number,
+              public categories: ProductCategoryEnum[]) {
   }
 }
 

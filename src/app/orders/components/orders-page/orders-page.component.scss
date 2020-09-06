@@ -1,0 +1,11 @@
+.highlight {
+  width: 100%;
+  height: 100%;
+  display: block;
+  animation: hl 3.6s linear;
+
+  @keyframes hl {
+    from {border: 2px solid #28a745;}
+    to {border: none;}
+  }
+}
