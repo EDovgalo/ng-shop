@@ -15,8 +15,9 @@ import {CartProductModel} from '../../../ cart/models/cart-product.model';
 export class ProductPageComponent implements OnInit {
 
   product: ProductModel;
+  isProductInCart: boolean;
+
   private buySub$: Subscription;
-  private isProductInCart: boolean;
 
   constructor(private productPromiseService: ProductPromiseService,
               private toasterService: ToasterService,
