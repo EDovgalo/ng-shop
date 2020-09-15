@@ -5,12 +5,15 @@ import {ProductListComponent} from './components/product-list/product-list.compo
 import {CanActivateAdminPageGuard} from './guards/can-activate-admin-page.guard';
 import {ProductFromComponent} from './components/product-from/product-from.component';
 import {AdminProductResolver} from './guards/admin-product.resolver';
+import {LoadCartProductsGuard} from '../ cart/guards/load-cart-products.guard';
+import {LoadProductsGuard} from '../core/guards/load-products.guard';
 
 
 const routes: Routes = [
   {
     path: '',
     component: AdminPageComponent,
+    canActivate: [LoadProductsGuard],
     canActivateChild: [CanActivateAdminPageGuard],
     children: [
       {
@@ -28,6 +31,7 @@ const routes: Routes = [
           {
             path: 'products/edit/:id',
             component: ProductFromComponent,
+            canActivate: [LoadCartProductsGuard],
             resolve: {
               product: AdminProductResolver
             },

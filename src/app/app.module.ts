@@ -9,6 +9,7 @@ import {CartModule} from './ cart/cart.module';
 import {CoreModule} from './core/core.module';
 import {HttpClientModule} from '@angular/common/http';
 import {httpInterceptorFactory} from './core/intreceptors';
+import {RootStoreModule} from './core/@ngrx/root-store.module';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import {httpInterceptorFactory} from './core/intreceptors';
   imports: [
     HttpClientModule,
     BrowserModule,
+    RootStoreModule,
     SharedModule,
     ProductsModule,
     CartModule,

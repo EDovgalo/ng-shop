@@ -1,39 +1,38 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@angular/router';
-import {from, Observable, of} from 'rxjs';
+import {map, take} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {select, Store} from '@ngrx/store';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
+
 import {ProductModel} from '../../shared/models/product.model';
-import {ProductPromiseService} from '../../products/services/product-promise.service';
-import {delay, map, take} from 'rxjs/operators';
 import {ToasterService} from '../../widgets/services/toaster.service';
+import {selectSelectedProduct} from '../../core/@ngrx/products/products.selectors';
+import * as RouterActions from '../../core/@ngrx/router/router.actions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminProductResolver implements Resolve<ProductModel> {
 
-  constructor(private productsService: ProductPromiseService,
-              private toasterService: ToasterService,
-              private router: Router) {
+  constructor(
+    private toasterService: ToasterService,
+    private store: Store) {
   }
 
   resolve(route: ActivatedRouteSnapshot,
-          state: RouterStateSnapshot): Observable<ProductModel> | Promise<ProductModel> | ProductModel {
-    if (!route.paramMap.has('id')) {
-      return of({} as ProductModel);
-    }
-    const id = +route.paramMap.get('id');
-    return from(this.productsService.getProductById(id)).pipe(
-      delay(3000),
+          state: RouterStateSnapshot): Observable<ProductModel> {
+    return this.store.pipe(
+      select(selectSelectedProduct),
       map((product: ProductModel) => {
         if (product) {
           return product;
         } else {
-          this.toasterService.showMessage('Product doesnt exists', true);
-          this.router.navigate(['/admin']);
+          this.toasterService.showMessage('product doesnt exist', true);
+          this.store.dispatch(RouterActions.go({path: ['/login']}));
           return null;
         }
       }),
-      take(1)
+      take(1),
     );
   }
 }

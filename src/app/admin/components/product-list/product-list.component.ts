@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ProductPromiseService} from '../../../products/services/product-promise.service';
+import {Observable} from 'rxjs';
+import {select, Store} from '@ngrx/store';
+import {AppState} from '../../../core/@ngrx/app.state';
+import * as ProductsActions from '../../../core/@ngrx/products/products.actions';
+import {selectProducts} from '../../../core/@ngrx/products/products.selectors';
 import {ProductModel} from '../../../shared/models/product.model';
 
 @Component({
@@ -8,19 +12,17 @@ import {ProductModel} from '../../../shared/models/product.model';
 })
 export class ProductListComponent implements OnInit {
 
-  products: Promise<ProductModel[]>;
+  products$: Observable<ProductModel[]>;
 
-  constructor(private productsService: ProductPromiseService) {
+  constructor(private store: Store<AppState>) {
   }
 
   ngOnInit(): void {
-    this.products = this.productsService.getProducts();
+    this.products$ = this.store.pipe(select(selectProducts));
   }
 
   onDelete(product): void {
-    this.productsService.deleteProduct(product).then(resp => {
-      this.products = this.productsService.getProducts();
-    });
+    this.store.dispatch(ProductsActions.deleteProduct({product}));
   }
 
 }

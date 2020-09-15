@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CardModeEnum, ProductModel} from '../../models/product.model';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ProductModel} from '../../models/product.model';
 
 @Component({
   selector: 'app-product-card',

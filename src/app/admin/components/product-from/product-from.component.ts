@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ProductCategoryEnum, ProductModel} from '../../../shared/models/product.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {pluck} from 'rxjs/operators';
-import {ProductPromiseService} from '../../../products/services/product-promise.service';
-import {ToasterService} from '../../../widgets/services/toaster.service';
+import {Store} from '@ngrx/store';
+
+import {ProductCategoryEnum, ProductModel} from '../../../shared/models/product.model';
+import * as ProductsActions from '../../../core/@ngrx/products/products.actions';
 
 @Component({
   selector: 'app-add-edit-product-from',
@@ -17,8 +18,7 @@ export class ProductFromComponent implements OnInit {
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private toasterService: ToasterService,
-              private productsService: ProductPromiseService) {
+              private store: Store) {
   }
 
   ngOnInit(): void {
@@ -29,17 +29,8 @@ export class ProductFromComponent implements OnInit {
 
   onSave(): void {
     const product = {...this.product};
-    const request = this.product.id ? this.productsService.updateProduct(product) :
-      this.productsService.addProduct(product);
-
-    request.then(() => {
-      const message = `${this.product.id ? 'Update' : 'Add'} successful`;
-      this.toasterService.showMessage(message);
-      this.router.navigate(['admin', 'products']);
-    }).catch((err) => {
-      this.toasterService.showMessage(err.message || 'something went wrong try later');
-      this.router.navigate(['admin', 'products']);
-    });
+    this.product.id ? this.store.dispatch(ProductsActions.updateProduct({product}))
+      : this.store.dispatch(ProductsActions.addProduct({product}));
   }
 
   private initProductCategories(): any {
