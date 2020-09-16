@@ -16,7 +16,7 @@ import * as CartActions from '../../../core/@ngrx/cart/cart.actions';
 export class ProductPageComponent implements OnInit, OnDestroy {
 
   product: IProduct;
-  private isProductInCart: boolean;
+  isProductInCart: boolean;
   private destroy$ = new Subject();
 
   constructor(private store: Store) {
