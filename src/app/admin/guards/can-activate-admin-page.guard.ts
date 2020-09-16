@@ -5,20 +5,21 @@ import {
   CanActivateChild,
   CanLoad,
   Route,
-  Router,
   RouterStateSnapshot,
   UrlSegment,
   UrlTree
 } from '@angular/router';
+import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {AuthService} from '../../core/services/auth.service';
+import * as RouterActions from '../../core/@ngrx/router/router.actions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CanActivateAdminPageGuard implements CanActivate, CanActivateChild, CanLoad {
 
-  constructor(private router: Router,
+  constructor(private store: Store,
               private authService: AuthService) {
   }
 
@@ -38,12 +39,14 @@ export class CanActivateAdminPageGuard implements CanActivate, CanActivateChild,
     return this.canActiveRoute();
   }
 
-
   private canActiveRoute(): any {
     if (this.authService.isLogin) {
       return true;
     }
-    return this.router.parseUrl('login');
+    this.store.dispatch(RouterActions.go({
+      path: ['/login'],
+    }));
+    return false;
   }
 
 

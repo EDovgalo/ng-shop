@@ -1,5 +1,5 @@
 <div>
-  <!-- [id] разве используется? -->
+  <!-- [id] разве используется? Да. Для скролла,  -->
   <app-order-card *ngFor="let order of orders" [order]="order"
                   [id]="order.id"
                   [class.highlight]="highlightOrderId === order.id">

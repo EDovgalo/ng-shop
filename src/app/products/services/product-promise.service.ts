@@ -25,7 +25,7 @@ export class ProductPromiseService {
       .catch(this.handlerError);
   }
 
-  addProduct(product: ProductModel): Promise<ProductModel[]> {
+  addProduct(product: ProductModel): Promise<ProductModel> {
     const options = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
@@ -42,7 +42,7 @@ export class ProductPromiseService {
       .catch(this.handlerError);
   }
 
-  updateProduct(product: ProductModel): Promise<ProductModel[]> {
+  updateProduct(product: ProductModel): Promise<ProductModel> {
     const options = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
