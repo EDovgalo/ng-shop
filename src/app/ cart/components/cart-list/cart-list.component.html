@@ -30,7 +30,7 @@
       </app-cart-card>
     </div>
 
-    <div class="d-flex mt-4" *ngIf="(cartProducts).length">
+    <div class="d-flex mt-4" *ngIf="cartProducts.length">
       <button class="btn-success btn border-0 m-auto" (click)="onCreateOrder()">confirm order</button>
     </div>
   </ng-container>
