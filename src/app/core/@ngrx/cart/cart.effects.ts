@@ -130,3 +130,5 @@ export class CartEffects {
 }
 
 
+// в операциях get используем switchMap, в других - concatMap
+

@@ -26,6 +26,7 @@ const routes: Routes = [
           },
           {
             path: 'products/add',
+            // тут наверное очепятка From => Form?
             component: ProductFromComponent,
           },
           {
