@@ -26,6 +26,13 @@ export class CartListComponent implements OnInit, OnDestroy {
     sortBy: null,
     isSortAsc: null,
   };
+
+  readonly STEPS = {
+    VIEW: 0,
+    CONFIRM: 1
+  };
+  step = this.STEPS.VIEW;
+
   private destroy$ = new Subject();
 
   constructor(private toaster: ToasterService,
