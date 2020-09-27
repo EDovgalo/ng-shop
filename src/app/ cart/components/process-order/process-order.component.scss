@@ -1,0 +1,15 @@
+.icon-close {
+  font-size: 38px;
+  line-height: .3;
+  padding-top: 8px;
+  color: #ced4da;
+  cursor: pointer;
+}
+
+.invalid-feedback {
+  display: block !important;
+}
+
+.submitted .ng-invalid {
+  border-color: #dc3545 !important;
+}

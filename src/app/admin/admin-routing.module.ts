@@ -3,7 +3,7 @@ import {AdminPageComponent} from './admin-page.component';
 import {NgModule} from '@angular/core';
 import {ProductListComponent} from './components/product-list/product-list.component';
 import {CanActivateAdminPageGuard} from './guards/can-activate-admin-page.guard';
-import {ProductFromComponent} from './components/product-from/product-from.component';
+import {ProductFormComponent} from './components/product-form/product-form.component';
 import {AdminProductResolver} from './guards/admin-product.resolver';
 import {LoadCartProductsGuard} from '../ cart/guards/load-cart-products.guard';
 import {LoadProductsGuard} from '../core/guards/load-products.guard';
@@ -26,12 +26,11 @@ const routes: Routes = [
           },
           {
             path: 'products/add',
-            // тут наверное очепятка From => Form?
-            component: ProductFromComponent,
+            component: ProductFormComponent,
           },
           {
             path: 'products/edit/:id',
-            component: ProductFromComponent,
+            component: ProductFormComponent,
             canActivate: [LoadCartProductsGuard],
             resolve: {
               product: AdminProductResolver

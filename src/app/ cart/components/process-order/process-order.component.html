@@ -1,0 +1,55 @@
+<form class="pl-5 pr-5" [class.submitted]="isSubmitted" [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input formControlName="name" type="text" class="form-control" id="name" placeholder="Enter name">
+    <div *ngIf="validationMessages.name" class="invalid-feedback">
+      {{validationMessages.name}}
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="second-name">Second name</label>
+    <input formControlName="secondName" type="text" class="form-control" id="second-name" placeholder="Second name">
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input formControlName="email"
+           appEmailValidator
+           type="email"
+           class="form-control"
+           id="email"
+           placeholder="Enter email">
+    <div *ngIf="validationMessages.email" class="invalid-feedback">
+      {{validationMessages.email}}
+    </div>
+  </div>
+
+  <div formArrayName="phones">
+    <label>Phones</label>
+    <div class="form-group d-flex" *ngFor="let phone of phones.controls; let i = index">
+      <input [formControlName]="i"
+             type="tel"
+             class="form-control justify-content-center"
+             [class.mr-0]="i"
+             id="{{'phone' + i}}"
+             placeholder="Enter phone">
+      <span *ngIf="i" class="icon-close" (click)="onRemovePhone(i)">&times;</span>
+    </div>
+    <button *ngIf="phones.length < maxPhones" (click)="onAddPhone()"
+            type="button" class="btn btn-primary">Add phone
+    </button>
+  </div>
+  <div class="form-check mt-3 mb-3">
+    <input formControlName="pickup" type="checkbox" class="form-check-input" id="pickup">
+    <label class="form-check-label" for="pickup">pickup</label>
+  </div>
+
+  <div *ngIf="orderForm.get('pickup').value" class="mt-3 mb-3">
+    <label for="address">Address</label>
+    <textarea formControlName="address" class="form-control" id="address" rows="3"></textarea>
+    <div *ngIf="validationMessages.address" class="invalid-feedback">
+      {{validationMessages.address}}
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

@@ -1,42 +1,48 @@
 <div class="cart-list">
 
-  <ng-container *ngIf="cartProducts.length;else emptyCart">
-    <div>
-      <p class="text-uppercase"> total products:
-        <span class="font-weight-bold">{{quantityProducts}}</span></p>
-      <p class="text-uppercase">total: <span class="font-weight-bold">{{totalAmount}}</span></p>
-    </div>
-
-    <div class="mb-3 d-flex align-items-center">
-      <span class="text-uppercase font-weight-bold">sort by</span>
-      <!-- Если используют ngModelChange, то в [(ngModel)] круглыйе скобки уже не ставят -->
-      <select class="ml-2 mr-2 pl-2 pr-2" [(ngModel)]="settings.sortBy"
-              (ngModelChange)="saveFilters('sortBy', settings.sortBy)">
-        <option *ngFor="let sortField of sortFields" [value]="sortField">{{sortField}}</option>
-      </select>
-
-      <div class="d-flex align-items-center ml-3">
-        <input type="checkbox" [(ngModel)]="settings.isSortAsc" id="order-sort"
-               (ngModelChange)="saveFilters('isSortAsc', settings.isSortAsc)">
-        <label for="order-sort" class="text-uppercase font-weight-bold m-0 ml-1">asc</label>
+  <div *ngIf="step === STEPS.VIEW">
+    <ng-container *ngIf="cartProducts.length;else emptyCart">
+      <div>
+        <p class="text-uppercase"> total products:
+          <span class="font-weight-bold">{{quantityProducts}}</span></p>
+        <p class="text-uppercase">total: <span class="font-weight-bold">{{totalAmount}}</span></p>
       </div>
-    </div>
 
-    <div class="product-list">
-      <app-cart-card *ngFor="let product of cartProducts | orderBy: settings.sortBy : settings.isSortAsc"
-                     (deleteProduct)="deleteProduct($event)"
-                     (increaseQuantity)="increaseQuantity($event)"
-                     (decreaseQuantity)="decreaseQuantity($event)"
-                     [product]="product">
-      </app-cart-card>
-    </div>
+      <div class="mb-3 d-flex align-items-center">
+        <span class="text-uppercase font-weight-bold">sort by</span>
+        <select class="ml-2 mr-2 pl-2 pr-2" [ngModel]="settings.sortBy"
+                (ngModelChange)="saveFilters('sortBy', settings.sortBy)">
+          <option *ngFor="let sortField of sortFields" [value]="sortField">{{sortField}}</option>
+        </select>
 
-    <div class="d-flex mt-4" *ngIf="cartProducts.length">
-      <button class="btn-success btn border-0 m-auto" (click)="onCreateOrder()">confirm order</button>
-    </div>
-  </ng-container>
+        <div class="d-flex align-items-center ml-3">
+          <input type="checkbox" [(ngModel)]="settings.isSortAsc" id="order-sort"
+                 (ngModelChange)="saveFilters('isSortAsc', settings.isSortAsc)">
+          <label for="order-sort" class="text-uppercase font-weight-bold m-0 ml-1">asc</label>
+        </div>
+      </div>
 
-  <ng-template #emptyCart>
-    <h5 class="cart-list__empty-title">Cart is empty</h5>
-  </ng-template>
+      <div class="product-list">
+        <app-cart-card *ngFor="let product of cartProducts | orderBy: settings.sortBy : settings.isSortAsc"
+                       (deleteProduct)="deleteProduct($event)"
+                       (increaseQuantity)="increaseQuantity($event)"
+                       (decreaseQuantity)="decreaseQuantity($event)"
+                       [product]="product">
+        </app-cart-card>
+      </div>
+
+      <div class="d-flex mt-4" *ngIf="cartProducts.length">
+        <button class="btn-success btn border-0 m-auto" (click)="step = STEPS.CONFIRM">next</button>
+      </div>
+    </ng-container>
+
+    <ng-template #emptyCart>
+      <h5 class="cart-list__empty-title">Cart is empty</h5>
+    </ng-template>
+  </div>
+
+  <div *ngIf="step === STEPS.CONFIRM">
+    <app-process-order (confirmOrder)="onCreateOrder()"></app-process-order>
+  </div>
+
 </div>
