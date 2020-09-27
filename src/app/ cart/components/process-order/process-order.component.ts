@@ -88,6 +88,14 @@ export class ProcessOrderComponent implements OnInit, OnDestroy {
     this.sub = this.orderForm
       .get('pickup')
       .valueChanges.subscribe((value) => this.updateAddressControl(value));
+
+    const formSub = this.orderForm.valueChanges
+      .subscribe(() => {
+      if (this.isSubmitted) {
+        this.updateValidationMessage();
+      }
+    });
+    this.sub.add(formSub);
   }
 
   private updateAddressControl(isPickup): void {
