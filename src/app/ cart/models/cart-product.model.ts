@@ -10,6 +10,8 @@ export class CartProductModel extends ProductModel {
     public rating: number,
     public categories: ProductCategoryEnum[],
     public count: number = 1) {
+      // то, что передается в super должно использоваться без public
+      // технически это ни на что не влияет, но так более грамотно
     super(id, name, description, price, isAvailable, rating, categories);
   }
 }

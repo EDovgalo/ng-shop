@@ -9,6 +9,7 @@
 
     <div class="mb-3 d-flex align-items-center">
       <span class="text-uppercase font-weight-bold">sort by</span>
+      <!-- Если используют ngModelChange, то в [(ngModel)] круглыйе скобки уже не ставят -->
       <select class="ml-2 mr-2 pl-2 pr-2" [(ngModel)]="settings.sortBy"
               (ngModelChange)="saveFilters('sortBy', settings.sortBy)">
         <option *ngFor="let sortField of sortFields" [value]="sortField">{{sortField}}</option>
