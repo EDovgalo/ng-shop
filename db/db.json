@@ -17,7 +17,26 @@
       "id": 2
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "id": 1,
+      "name": "test",
+      "description": "23",
+      "price": 122,
+      "isAvailable": true,
+      "categories": "home appliances",
+      "count": 1
+    },
+    {
+      "id": 2,
+      "name": "test",
+      "description": "23",
+      "price": 122,
+      "isAvailable": true,
+      "categories": "home appliances",
+      "count": 1
+    }
+  ],
   "settings": {
     "sortBy": null,
     "isSortAsc": null

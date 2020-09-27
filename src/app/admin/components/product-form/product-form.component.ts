@@ -8,10 +8,10 @@ import * as ProductsActions from '../../../core/@ngrx/products/products.actions'
 
 @Component({
   selector: 'app-add-edit-product-from',
-  templateUrl: './product-from.component.html',
-  styleUrls: ['./product-from.component.scss']
+  templateUrl: './product-form.component.html',
+  styleUrls: ['./product-form.component.scss']
 })
-export class ProductFromComponent implements OnInit {
+export class ProductFormComponent implements OnInit {
 
   productCategories = this.initProductCategories();
   product = {} as ProductModel;

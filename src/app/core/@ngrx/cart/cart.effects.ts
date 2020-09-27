@@ -81,7 +81,7 @@ export class CartEffects {
     this.actions$.pipe(
       ofType(CartActions.getCartProductById),
       pluck('id'),
-      concatMap((id: number) =>
+      switchMap((id: number) =>
         this.cartService.getProductById(id).pipe(
           map(cartProduct => {
             return CartActions.getCartProductByIdSuccess({cartProduct});
@@ -107,7 +107,7 @@ export class CartEffects {
   confirmOrder$: Observable<Action> = createEffect(() => {
     return this.actions$.pipe(
       ofType(CartActions.confirmOrder),
-      switchMap(({orderId, cartProducts}) => [
+      concatMap(({orderId, cartProducts}) => [
         RouterActions.go({path: ['orders'], queryParams: {scrollTo: orderId}}),
         CartActions.deleteCartProducts({cartProducts})
       ])
@@ -118,7 +118,7 @@ export class CartEffects {
     return this.actions$.pipe(
       ofType(CartActions.deleteCartProducts),
       pluck('cartProducts'),
-      switchMap((cartProducts) => {
+      concatMap((cartProducts) => {
         return merge(...cartProducts.map(item => this.cartService.deleteProduct(item)))
           .pipe(
             map(() => CartActions.deleteCartProductsSuccess()),
@@ -128,5 +128,4 @@ export class CartEffects {
     );
   });
 }
-
 
