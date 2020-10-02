@@ -13,7 +13,7 @@ import {CustomEmailValidatorDirective} from './components/process-order/validato
     CartRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [CartListComponent],
+  providers: [CartListComponent], // зачем в провайдерах?
   declarations: [
     CartCardComponent,
     CartListComponent,
