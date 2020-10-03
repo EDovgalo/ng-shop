@@ -1,6 +1,6 @@
 <app-product-card [product]="product"
                   [isShowAvailable]="false">
-  <div class="d-flex justify-content-center">
+  <div class="btn d-flex justify-content-center">
     <button *ngIf="product.count >= 2"
             class="btn btn-secondary"
             (click)="$event.stopPropagation(); onDecreaseQuantity()">&#x3c;

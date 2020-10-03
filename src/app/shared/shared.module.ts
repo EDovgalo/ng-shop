@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {HighlightDirective} from './directives/highlight/highlight.directive';
 import {RatingComponent} from './components/rating/rating.component';
 import {ZoomDirective} from './directives/zoom/zoom.directive';
-import {OrderByPipe} from './pipes/order-by/oreder-by.pipe';
+import {OrderByPipe} from './pipes/order-by/order-by.pipe';
 import {FormsModule} from '@angular/forms';
 import {ProductCardComponent} from './components/product-card/product-card.component';
 import {RouterModule} from '@angular/router';

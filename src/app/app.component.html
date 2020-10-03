@@ -1,8 +1,20 @@
-<app-header></app-header>
+<header class="border-bottom shadow-sm  p-3">
+  <h1 #appTitle></h1>
+  <nav class="nav nav-pills d-flex flex-row">
+    <a class="nav-item nav-link" routerLink="home" routerLinkActive="active">Home</a>
+    <a class="nav-item nav-link" routerLink="cart" routerLinkActive="active">Cart</a>
+    <a class="nav-item nav-link" routerLink="orders" routerLinkActive="active">Orders</a>
+    <a class="nav-item nav-link ml-auto"
+       *ngIf="!authService.isLogin"
+       routerLink="login" routerLinkActive="active">Login
+    </a>
+    <a class="nav-item nav-link ml-auto btn"
+       (click)="logout()"
+       *ngIf="authService.isLogin">Logout
+    </a>
+  </nav>
+</header>
+
 <div class="content">
-<!--  <app-cart-list></app-cart-list>-->
-<!--  <app-product-card-list></app-product-card-list>-->
   <router-outlet></router-outlet>
 </div>
-
-<!--<app-about></app-about>-->
