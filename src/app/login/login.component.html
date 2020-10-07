@@ -1,6 +1,6 @@
 <div class="d-flex flex-column align-items-center mt-5">
-
   <div>
+
     <div>
       <label class="label" for="login">login</label>
       <input id="login" #userLogin>
@@ -10,6 +10,7 @@
       <label class="label" for="password">password</label>
       <input id="password" type="password" #password>
     </div>
+
     <p class="text-danger" *ngIf="isShowMessage">{{message}}</p>
     <button class="btn-success p-2 border-0"
             (click)="login(userLogin.value, password.value)">login</button>
